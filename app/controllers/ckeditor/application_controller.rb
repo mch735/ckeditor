@@ -2,9 +2,9 @@ class Ckeditor::ApplicationController < ApplicationController
   respond_to :html, :json
   layout 'ckeditor/application'
 
-  before_filter :find_asset, :only => [:destroy]
-  before_filter :ckeditor_authorize!
-  before_filter :authorize_resource
+  before_action :find_asset, :only => [:destroy]
+  before_action :ckeditor_authorize!
+  before_action :authorize_resource
 
   protected
 
@@ -19,10 +19,10 @@ class Ckeditor::ApplicationController < ApplicationController
           window.parent.CKEDITOR.tools.callFunction(#{params[:CKEditorFuncNum]}, '#{config.relative_url_root}#{Ckeditor::Utils.escape_single_quotes(asset.url_content)}');
         </script>"
 
-        render :text => body
+        render :plain => body
       else
         if params[:CKEditor]
-          render :text => %Q"<script type='text/javascript'>
+          render :plain => %Q"<script type='text/javascript'>
               window.parent.CKEDITOR.tools.callFunction(#{params[:CKEditorFuncNum]}, null, '#{asset.errors.full_messages.first}');
             </script>"
         else
