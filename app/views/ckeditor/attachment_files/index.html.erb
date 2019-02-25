@@ -11,7 +11,7 @@
 
   <% unless @attachments.last_page? %>
     <div class="pagination">
-      <%= link_to I18n.t("ckeditor.buttons.next"), params.merge(:page => @attachments.next_page), :class => "next", :rel => "next" %>
+      <%= link_to I18n.t("ckeditor.buttons.next"), query_parameters.merge(:page => @attachments.next_page), :class => "next", :rel => "next" %>
     </div>
   <% end -%>
 

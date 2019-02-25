@@ -2,9 +2,15 @@ class Ckeditor::ApplicationController < ApplicationController
   respond_to :html, :json
   layout 'ckeditor/application'
 
+  helper_method :query_parameters
+
   before_action :find_asset, :only => [:destroy]
   before_action :ckeditor_authorize!
   before_action :authorize_resource
+
+  def query_parameters
+    @query_parameters ||= request.query_parameters.symbolize_keys
+  end
 
   protected
 
